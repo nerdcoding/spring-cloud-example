@@ -36,7 +36,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class ProductController {
 
     private static final List<Product> IN_MEMORY_DB = new ArrayList<>(Arrays.asList(
