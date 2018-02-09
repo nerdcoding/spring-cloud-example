@@ -21,16 +21,10 @@ package org.nerdcoding.example.spring.cloud.ms.product.web;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HealthCheckController {
-
-    @GetMapping("/hello/{name}")
-    public ResponseEntity<String> hello(@PathVariable("name") final String name) {
-        return new ResponseEntity<>("Hello, " + name, HttpStatus.OK);
-    }
 
     @GetMapping("/health")
     public ResponseEntity<Void> health() {
