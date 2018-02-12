@@ -1,0 +1,49 @@
+=== login
+
+*Request:* +
+POST http://127.0.0.1:9094/auth/oauth/token +
+Authorization bXMtcHJvZHVjdDpteXNlY3JldA== (Basic auth: ms-product:mysecret) +
+Content-Type application/x-www-form-urlencoded
+
+grant_type=password&scope=webclient&username=oliver.hardy&password=password1
+
+*Response:* +
+```
+{
+    "access_token": "bd339e24-17d7-4b6e-8bc7-59c89eadc435",
+    "token_type": "bearer",
+    "refresh_token": "4f8f55d8-d9a2-45e7-980f-86fa9f713838",
+    "expires_in": 43199,
+    "scope": "webclient"
+}
+```
+
+=== check token
+
+*Request:* +
+GET http://127.0.0.1:9094/auth/user +
+Authorization Bearer bd339e24-17d7-4b6e-8bc7-59c89eadc435 (access_token from login)
+
+*Response:* +
+```
+{
+    "user": {
+        "password": null,
+        "username": "oliver.hardy",
+        "authorities": [
+            {
+                "authority": "ROLE_USER"
+            }
+        ],
+        "accountNonExpired": true,
+        "accountNonLocked": true,
+        "credentialsNonExpired": true,
+        "enabled": true
+    },
+    "authorities": [
+        {
+            "authority": "ROLE_USER"
+        }
+    ]
+}
+```
