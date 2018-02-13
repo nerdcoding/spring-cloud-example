@@ -37,7 +37,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
  * Configuration for token based authentication and authorization (see implemented {@link AuthorizationServerConfigurer}).
  */
 @Configuration
-public class Oauth2Configuration extends AuthorizationServerConfigurerAdapter {
+public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 
     private static final String SIGNING_KEY =
             "MIICXAIBAAKBgQCzjH0f73kMe3jdE57CH2tqnYQl2uuPvpiAOnmpShExzWdSW3IGd4p68VHJXMmDI3JXF3Ar5oY8BXwKkbLdjLFn6pF" +
@@ -50,7 +50,7 @@ public class Oauth2Configuration extends AuthorizationServerConfigurerAdapter {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public Oauth2Configuration(final AuthenticationManager authenticationManager, final UserDetailsService userDetailsService) {
+    public OAuth2Configuration(final AuthenticationManager authenticationManager, final UserDetailsService userDetailsService) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
     }

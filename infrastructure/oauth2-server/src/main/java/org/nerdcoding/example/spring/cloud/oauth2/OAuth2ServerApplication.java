@@ -15,10 +15,10 @@ import java.util.Map;
 @RestController
 @EnableResourceServer
 @EnableAuthorizationServer
-public class Oauth2ServerApplication {
+public class OAuth2ServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Oauth2ServerApplication.class, args);
+		SpringApplication.run(OAuth2ServerApplication.class, args);
 	}
 
 	/**
@@ -35,5 +35,6 @@ public class Oauth2ServerApplication {
 		userInfo.put("authorities", user.getUserAuthentication().getAuthorities());
 		return userInfo;
 	}
+
 
 }
