@@ -47,3 +47,23 @@ Authorization Bearer bd339e24-17d7-4b6e-8bc7-59c89eadc435 (access_token from log
     ]
 }
 ```
+
+=== refresh token
+
+*Request:* +
+POST http://127.0.0.1:9094/auth/oauth/token +
+Authorization bXMtcHJvZHVjdDpteXNlY3JldA== (Basic auth: ms-product:mysecret) +
+Content-Type application/x-www-form-urlencoded
+
+grant_type=refresh_token&refresh_token=4f8f55d8-d9a2-45e7-980f-86fa9f713838
+
+*Response:* +
+```
+{
+    "access_token": "f52525eb-c814-406d-8c02-f4a51c0f4a7b",
+    "token_type": "bearer",
+    "refresh_token": "4f8f55d8-d9a2-45e7-980f-86fa9f713838",
+    "expires_in": 43199,
+    "scope": "webclient"
+}
+```
