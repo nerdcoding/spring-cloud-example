@@ -39,6 +39,13 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 public class Oauth2Configuration extends AuthorizationServerConfigurerAdapter {
 
+    private static final String SIGNING_KEY =
+            "MIICXAIBAAKBgQCzjH0f73kMe3jdE57CH2tqnYQl2uuPvpiAOnmpShExzWdSW3IGd4p68VHJXMmDI3JXF3Ar5oY8BXwKkbLdjLFn6pF" +
+                    "21AY9q17TgXK/7hP71MoSu3QNtgOcmJ5PqvWFvFqP7yA0PXfKtsDqTliTTaf1ljr2GqpS6hOsFoHmmTrBaQIDAQABAoGAZF" +
+                    "e1be2VhuZSS6s1ZGPO0kypl8ZbM4BfFfqYF4YvSdfzUFGOzhJsr/zBqnlSnRloQ0f0BnTUvCKMihOXFL4WPn6m9S/C4//4J" +
+                    "7o6QiV/vddMu8HdP1tWF3UDoH+wrL1oQ1RrQtNlXsgj0CX7e3P5WmlNR1qXb59zDGh1wY45zOkCQQDorpoesS1dwWTzgNo79" +
+                    "QW8eBI/+je9KEuNts";
+
     private final AuthenticationManager authenticationManager;
     private final UserDetailsService userDetailsService;
 
@@ -59,7 +66,8 @@ public class Oauth2Configuration extends AuthorizationServerConfigurerAdapter {
                 .withClient("ms-product") // key of the registered microservice
                 .secret("mysecret") // password of the registered microservice
                 .authorizedGrantTypes("refresh_token", "password", "client_credentials")
-                .scopes("webclient", "mobileclient");
+                .scopes("webclient", "mobileclient")
+                .accessTokenValiditySeconds(360); // 5 min.
 
     }
 
@@ -94,7 +102,7 @@ public class Oauth2Configuration extends AuthorizationServerConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("123");
+        converter.setSigningKey(SIGNING_KEY);
         return converter;
     }
 
