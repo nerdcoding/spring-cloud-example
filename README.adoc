@@ -31,8 +31,9 @@ http://maven.apache.org[Maven3] needs to be installed.
 
 
 All sub projects (servers) could be build with a simple +
-`mvn clean install` and started with a +
-`java -jar target/<jar-file-name>.jar`.
+`mvn clean install` +
+and started with a +
+`java -jar target/<jar-file-name>.jar` +
 Make sure to start all servers in the given order: +
 * `infrastructure/eureka-server`  +
 * `infrastructure/zuul-server`  +
