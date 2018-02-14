@@ -1,0 +1,53 @@
+=== Basic example for using microservices with Spring Cloud
+
+This project consists of three infrastructure projects:
+
+* Eureka
+Eureka is a service discovery server. Each microservices cloud register itself at the Eureka server with it's IP address
+so that user of the microservices could find the them.
+
+* Zuul
+Zuul act as a gatekeeper. Each incoming request (e.g. from a frontend) goes throw the Zuul server and could be filtered
+here. Anymore Zuul is responsible for the routing, with the path of an incoming HTTP requests Zuul could determine which
+microservice should be called. Zuul calls the Eureka server to determine the concrete IPs if the appropriate
+microservice instances sends the reuqest forward. Finally Zuul by default contains a load balancer, called Ribbon, and
+is able to balance requests between different instances of the same microservice.
+
+* OAuth2 server
+The OAuth2 server uses Spring Security OAuth2 and implements a authentication and authorization mechanism which
+generates a OAuth2 `access_token` and `refresh_token`. For both token Json Web Token (JWT) is used.
+
+Besides of the infrastructure there is one microservice `ms-product`. This microservice implements a simple REST
+endpoint to work on the `Product` ressource. This microservice is secured and all incoming requests must provide an
+OAuth2 `access_token`.
+
+=== Build
+
+To build and run all servers from this example a installation of
+http://www.oracle.com/technetwork/java/javase/downloads/index.html[JDK 8] is required. Anymore
+http://maven.apache.org[Maven3] needs to be installed.
+
+*Note:* Because all projects are based on Spring Boot 1.5.x they will not run with JDK 9 or higher!
+
+
+All sub projects (servers) could be build with a simple `mvn clean install` and started with a
+`java -jar target/<jar-file-name>.jar`. Make sure to start all servers in the given order: +
+* `infrastructure/eureka-server`  +
+* `infrastructure/zuul-server`  +
+* `infrastructure/oauth2-server` +
+* `microservice/ms-product` +
+
+=== Requests
+
+The Eureka server could be found at `http://127.0.0.1:9090/` and should show all others servers which are registered.
+
+To obtain a OAuth2 token see the description in `infrastructure/oauth2-server/readme.adoc`.
+
+The product microservice could be called via Zuul with a:
+```
+GET http://127.0.0.1:9092/zuul-product/ms-product/api/products
+Authorization <access_token>
+```
+=== Licensing
+The software of this repository is licensed under the GNU General Public License v2. See
+https://www.gnu.org/licenses/gpl-2.0.html[LICENSE] for the full license text.
